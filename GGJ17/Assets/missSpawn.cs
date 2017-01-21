@@ -10,11 +10,8 @@ public class missSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        var myPrefab = Resources.Load("missile");
-        Debug.Log(myPrefab);
-        var instance = (GameObject)Instantiate(myPrefab);
-        Debug.Log(instance);
-        Vector2 rand = new Vector2(Random.Range(-200, 200)/100, Random.Range(-200, 200)/100);
+        var instance = Resources.Load("missile");
+        Vector2 rand = new Vector2(Random.Range(-400, 400)/100, Random.Range(-400, 400)/100);
         Instantiate(instance, rand, Quaternion.Euler(0, 0, Random.Range(0,360)));
 
     }
