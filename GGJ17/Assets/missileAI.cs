@@ -5,8 +5,14 @@ using UnityEngine;
 public class missileAI : MonoBehaviour {
     //public Rigidbody2D miss;
     private Rigidbody2D miss;
+    void exploder ()
+    {
+        GameObject instance = (GameObject)Resources.Load("explosion");
+        Instantiate(instance, gameObject.transform);
+    }
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         miss = GetComponent<Rigidbody2D>();
     }
 	
@@ -16,13 +22,14 @@ public class missileAI : MonoBehaviour {
 
         var distance2 = Vector2.Distance(miss.transform.position, GameObject.Find("player_2").transform.position);
 
-        if (distance <= 5)
+        if (distance <= 0.4)
         {
+            exploder();
             Destroy(gameObject);
         }
-        else if (distance2 <= 5)
+        else if (distance2 <= 0.4)
         {
-
+            exploder();
             Destroy(gameObject);
         }
         
@@ -30,6 +37,5 @@ public class missileAI : MonoBehaviour {
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
-        Debug.Log("deleting (oor)");
     }
 }
