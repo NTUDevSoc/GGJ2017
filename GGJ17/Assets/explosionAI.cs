@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class explosionAI : MonoBehaviour {
 
-    private Vector3 expand = new Vector3(0,0,1);
+    private Vector3 rescaleVector;
+    private float timeElapsed;
+    private float expansion;
 
-    float n = 0;
+    public float expansionRate;
+    public float timeToDelete;
 
     // Use this for initialization
     void Start() {
-
-        gameObject.transform.localScale=expand;
-		
-	}
+        timeElapsed = 0.0f;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        n = n + 0.00167F;
-        expand = new Vector3(n, n, 1);
-		if (n >= 1.05)
+        timeElapsed += Time.deltaTime;
+
+        expansion += expansionRate;
+        rescaleVector = new Vector3(expansion, expansion, 1);
+
+        gameObject.transform.localScale = rescaleVector;
+
+        if (timeElapsed > timeToDelete)
         {
             Destroy(gameObject);
         }
-        gameObject.transform.localScale = expand;
 	}
 }

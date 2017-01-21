@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class missileAI : MonoBehaviour {
-    //public Rigidbody2D miss;
+
     private Rigidbody2D miss;
-    void exploder (Vector3 orient)
+    public float colliderRange;
+
+    void exploder ()
     {
-        GameObject instance = (GameObject)Resources.Load("explosion");
-        Instantiate(instance, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject expGameObj = (GameObject)Resources.Load("explosion");
+        Instantiate(expGameObj, gameObject.transform.position, gameObject.transform.rotation);
     }
     // Use this for initialization
     void Start ()
@@ -19,18 +21,13 @@ public class missileAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        var distance = Vector2.Distance(miss.transform.position, GameObject.Find("player_1").transform.position);
+        var distToPlayer1 = Vector2.Distance(miss.transform.position, GameObject.Find("player_1").transform.position);
 
-        var distance2 = Vector2.Distance(miss.transform.position, GameObject.Find("player_2").transform.position);
+        var distToPlayer2 = Vector2.Distance(miss.transform.position, GameObject.Find("player_2").transform.position);
 
-        if (distance <= 0.8)
+        if ( (distToPlayer1 <= colliderRange) || (distToPlayer2 <= colliderRange) )
         {
-            exploder(miss.transform.position);
-            Destroy(gameObject);
-        }
-        else if (distance2 <= 0.8)
-        {
-            exploder(miss.transform.position);
+            exploder();
             Destroy(gameObject);
         }
         
