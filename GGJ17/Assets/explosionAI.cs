@@ -5,30 +5,24 @@ using UnityEngine;
 public class explosionAI : MonoBehaviour {
 
     private Vector3 expand = new Vector3(0,0,1);
-    private float timeElapsed;
-    private Camera viewport;
 
-    public float rateOfExpansion;
-    public float timeToDelete;
+    float n = 0;
 
     // Use this for initialization
     void Start() {
-        Debug.Log("Executing explosion.");
-        viewport = Camera.main;
-        timeElapsed = 0.0f;
+
+        gameObject.transform.localScale=expand;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        // Counting time since the start of the explosion - used for detecting when to destroy obj.
-        timeElapsed += Time.deltaTime;
-
-        // using Time.deltaTime (change in time per frame) to make expansion relative to fps
-        expand = new Vector3(rateOfExpansion, rateOfExpansion, 1.0f) * Time.deltaTime;
-
-        if (timeElapsed > timeToDelete)
+        n = n + 0.00167F;
+        expand = new Vector3(n, n, 1);
+		if (n >= 1.05)
         {
             Destroy(gameObject);
         }
+        gameObject.transform.localScale = expand;
 	}
 }
