@@ -13,6 +13,7 @@ public class explosionAI : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        gameObject.transform.localScale = rescaleVector;
         timeElapsed = 0.0f;
     }
 	
