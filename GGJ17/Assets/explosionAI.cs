@@ -10,19 +10,19 @@ public class explosionAI : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Debug.Log("blelele");
 
-        gameObject.transform.localScale+=expand;
+        gameObject.transform.localScale=expand;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        n = n + 177;
-        expand = new Vector3(n/1000, n/1000, 1);
-		if (n == 1050)
+        n = n + 0.00167F;
+        expand = new Vector3(n, n, 1);
+		if (n >= 1.05)
         {
             Destroy(gameObject);
         }
+        gameObject.transform.localScale = expand;
 	}
 }
