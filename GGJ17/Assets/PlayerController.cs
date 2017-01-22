@@ -24,9 +24,27 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             isAlive = false;
+            string opponent = "";
+            bool doIt = false;
+            if(player == "1")
+            {
+                doIt = GameObject.Find("player_2").GetComponent<PlayerController>().isAlive;
+                opponent = "two_wins";
+            }
+            else if(player == "2")
+            {
+                doIt = GameObject.Find("player_1").GetComponent<PlayerController>().isAlive;
+                opponent = "one_wins";
+            }
+            if (doIt)
+            {
+                Instantiate(Resources.Load("game_over"), new Vector3(0.3f, 2.89f, 0.128906f), Quaternion.Euler(0,0,0));
+                var instance = Resources.Load(opponent);
+                Instantiate(instance, new Vector3(0.15f, 0.55f, 0.128906f), Quaternion.Euler(0, 0, 0));
+            }
         }
         if (isAlive)
         {
@@ -56,7 +74,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            for(int i = 0; i < cc2ds.Length; i++)
+            for (int i = 0; i < cc2ds.Length; i++)
             {
                 cc2ds[i].enabled = false;
             }
@@ -78,7 +96,7 @@ public class PlayerController : MonoBehaviour
         }
         if (otherObject.gameObject.CompareTag("Explosion"))
         {
-            health -= 40;
+            health -= 5;
         }
     }
 }
