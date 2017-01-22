@@ -36,4 +36,14 @@ public class missileAI : MonoBehaviour {
     {
         Destroy(gameObject);
     }
+
+    void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        if (otherObject.gameObject.CompareTag("Bullet"))
+        {
+            otherObject.gameObject.SetActive(false);
+            exploder();
+            Destroy(gameObject);
+        }
+    }
 }
