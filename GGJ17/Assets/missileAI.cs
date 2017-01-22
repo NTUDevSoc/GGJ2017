@@ -27,7 +27,7 @@ public class missileAI : MonoBehaviour {
 
         if ( (distToPlayer1 <= colliderRange) || (distToPlayer2 <= colliderRange) )
         {
-            exploder();
+            exploder(); 
             Destroy(gameObject);
         }
         
